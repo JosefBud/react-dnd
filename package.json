@@ -2,9 +2,10 @@
   "name": "react-dnd",
   "version": "1.0.0",
   "description": "D&D character sheet built in React",
-  "main": "index.js",
+  "main": "index.jsx",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "./node_modules/.bin/webpack -d"
   },
   "repository": {
     "type": "git",
@@ -24,5 +25,12 @@
   "bugs": {
     "url": "https://github.com/JosefBud/react-dnd/issues"
   },
-  "homepage": "https://github.com/JosefBud/react-dnd#readme"
+  "homepage": "https://github.com/JosefBud/react-dnd#readme",
+  "dependencies": {
+    "eslint": "^6.1.0",
+    "webpack": "^4.38.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^3.3.6"
+  }
 }
