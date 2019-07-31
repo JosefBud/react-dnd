@@ -1,0 +1,28 @@
+{
+  "name": "react-dnd",
+  "version": "1.0.0",
+  "description": "D&D character sheet built in React",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JosefBud/react-dnd.git"
+  },
+  "keywords": [
+    "d&d",
+    "dnd",
+    "dungeons",
+    "and",
+    "dragons",
+    "character",
+    "sheet"
+  ],
+  "author": "JosefBud",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/JosefBud/react-dnd/issues"
+  },
+  "homepage": "https://github.com/JosefBud/react-dnd#readme"
+}
