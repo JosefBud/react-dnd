@@ -40,6 +40,19 @@ export default {
             }
           }
         ]
+      },
+      {
+        test: /\.(png|svg|jpg|gif)$/,
+        use: [{
+          loader: 'file-loader',
+          options: {
+            name: 'media/[name].[ext]'
+          }
+        }]
+      },
+      {
+        test: /\.html$/,
+        use: ['file-loader?name=[name].[ext]']
       }
     ]
   },
