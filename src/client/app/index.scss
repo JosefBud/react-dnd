@@ -1,11 +1,42 @@
 @import "~bootstrap/scss/bootstrap";
+@import url('https://fonts.googleapis.com/css?family=Cinzel|IM+Fell+English+SC&display=swap');
+
+$old-timey-font: 'IM Fell English SC';
+$rpg-font: 'Cinzel';
+
+body {
+  font-family: $rpg-font, serif;
+}
+
+.input-group-prepend,
+.input-group-append {
+  font-family: $old-timey-font, serif;
+
+  .input-group-text {
+    font-size: 1.3em !important;
+    padding: 0.1rem 0.75rem;
+  }
+}
 
 .background-image {
   position: absolute;
   left: 2.5%;
-  top: 0;
+  top: 5%;
   opacity: 0.4;
   width: 95%;
   //height: auto;
   z-index: -1;
+}
+
+.row {
+  padding-bottom: 8px;
+}
+
+.dropdown .btn {
+  width: 100%;
+}
+
+.dropdown-item {
+  white-space: normal;
+  font-family: $rpg-font;
 }
