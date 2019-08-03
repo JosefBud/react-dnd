@@ -40,3 +40,24 @@ body {
   white-space: normal;
   font-family: $rpg-font;
 }
+
+.input--small {
+  width: 8em;
+}
+
+.input--smaller {
+  width: 6em;
+
+  .input--stats {
+    text-align: center;
+  }
+}
+
+.card {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.list-group-item {
+  font-size: 0.8em;
+}
