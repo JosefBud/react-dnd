@@ -29,61 +29,137 @@ class App extends Component {
       addXP: 0,
       characterLevel: 1,
       stats: {
-        strength: 0,
-        strengthMod: 0,
-        dexterity: 0,
-        dexterityMod: 0,
-        constitution: 0,
-        constitutionMod: 0,
-        intelligence: 0,
-        intelligenceMod: 0,
-        wisdom: 0,
-        wisdomMod: 0,
-        charisma: 0,
-        charismaMod: 0
+        strength: {
+          points: 0,
+          mod: 0,
+          related: ["athletics"]
+        },
+        dexterity: {
+          points: 0,
+          mod: 0,
+          related: ["acrobatics", "sleightOfHand", "stealth"]
+        },
+        constitution: {
+          points: 0,
+          mod: 0,
+          related: []
+        },
+        intelligence: {
+          points: 0,
+          mod: 0,
+          related: ["arcana", "history", "investigation", "nature", "religion"]
+        },
+        wisdom: {
+          points: 0,
+          mod: 0,
+          related: [
+            "animalHandling",
+            "insight",
+            "medicine",
+            "perception",
+            "survival"
+          ]
+        },
+        charisma: {
+          points: 0,
+          mod: 0,
+          related: ["deception", "intimidation", "performance", "persuasion"]
+        }
       },
       skills: {
-        acrobaticsProf: false,
-        acrobaticsExp: false,
-        animalHandlingProf: false,
-        animalHandlingExp: false,
-        arcanaProf: false,
-        arcanaExp: false,
-        deceptionProf: false,
-        deceptionExp: false,
-        historyProf: false,
-        historyExp: false,
-        insightProf: false,
-        insightExp: false,
-        intimidationProf: false,
-        intimidationExp: false,
-        investigationProf: false,
-        investigationExp: false,
-        medicineProf: false,
-        medicineExp: false,
-        natureProf: false,
-        natureExp: false,
-        perceptionProf: false,
-        perceptionExp: false,
-        performanceProf: false,
-        performanceExp: false,
-        persuasionProf: false,
-        persuasionExp: false,
-        religionProf: false,
-        religionExp: false,
-        sleightOfHandProf: false,
-        sleightOfHandExp: false,
-        stealthProf: false,
-        stealthExp: false,
-        survivalProf: false,
-        survivalExp: false
-      },
-      inputFields: [1, 2, 3, 4],
-      test: "oh hey"
+        acrobatics: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        animalHandling: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        arcana: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        athletics: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        deception: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        history: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        insight: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        intimidation: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        investigation: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        medicine: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        nature: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        perception: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        performance: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        persuasion: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        religion: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        sleightOfHand: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        stealth: {
+          mod: 0,
+          prof: false,
+          exp: false
+        },
+        survival: {
+          mod: 0,
+          prof: false,
+          exp: false
+        }
+      }
     };
 
-    this.handleClick = this.handleClick.bind(this);
-    this.renderField = this.renderField.bind(this);
     this.handleXPAdd = this.handleXPAdd.bind(this);
     this.calculateStatModifier = this.calculateStatModifier.bind(this);
     this.calculateSkillModifier = this.calculateSkillModifier.bind(this);
@@ -92,29 +168,92 @@ class App extends Component {
   }
   componentDidUpdate() {}
 
-  calculateStatModifier(statModName, points) {
+  calculateStatModifier(statName, points) {
     let parsedPoints = parseInt(points);
     let modifier = Math.round((parsedPoints - 11) / 2);
     if (modifier < 0) {
       modifier = 0;
     }
 
+    this.state.stats[statName].related.forEach(skill => {
+      this.setState(prevState => ({
+        skills: {
+          ...prevState.skills,
+          [skill]: {
+            ...prevState.skills[skill],
+            mod: modifier
+          }
+        }
+      }));
+    });
+
     this.setState(prevState => ({
       stats: {
         ...prevState.stats,
-        [statModName]: modifier
+        [statName]: {
+          ...prevState.stats[statName],
+          points: parsedPoints,
+          mod: modifier
+        }
       }
     }));
   }
 
-  calculateSkillModifier(skill) {}
+  calculateSkillModifier(skillVarName, relatedStat, prof, exp) {
+    if (prof) {
+      this.setState(
+        prevState => ({
+          skills: {
+            ...prevState.skills,
+            [skillVarName]: {
+              ...prevState.skills[skillVarName],
+              prof: !this.state.skills[skillVarName].prof
+            }
+          }
+        }),
+        () => {
+          afterStateUpdate();
+        }
+      );
+    }
 
-  handleClick() {
-    let inputFields = this.state.inputFields;
-    let lastOne = inputFields.pop();
-    inputFields.push(lastOne);
-    inputFields.push(lastOne + 1);
-    this.setState({ inputFields: inputFields });
+    if (exp) {
+      this.setState(
+        prevState => ({
+          skills: {
+            ...prevState.skills,
+            [skillVarName]: {
+              ...prevState.skills[skillVarName],
+              exp: !this.state.skills[skillVarName].exp
+            }
+          }
+        }),
+        () => {
+          afterStateUpdate();
+        }
+      );
+    }
+
+    const afterStateUpdate = () => {
+      let relatedStatVar = relatedStat.toLowerCase();
+      let baseModifier = this.state.stats[relatedStatVar].mod;
+      if (this.state.skills[skillVarName].prof) {
+        baseModifier += 3;
+        if (this.state.skills[skillVarName].exp) {
+          baseModifier += 3;
+        }
+      }
+
+      this.setState(prevState => ({
+        skills: {
+          ...prevState.skills,
+          [skillVarName]: {
+            ...prevState.skills[skillVarName],
+            mod: baseModifier
+          }
+        }
+      }));
+    };
   }
 
   handleXPAdd() {
@@ -122,27 +261,16 @@ class App extends Component {
     this.setState({ characterXP: this.state.characterXP + xpToAdd });
   }
 
-  renderField() {
-    return this.state.inputFields.map((text, index) => {
-      return (
-        <div key={index}>
-          <input type="text" id={text} />
-        </div>
-      );
-    });
-  }
-
   renderStatCards(statName) {
     const statVarName = statName.toLowerCase();
-    const statModName = statVarName + "Mod";
 
     return (
       <Card>
         <Card.Title>{statName}</Card.Title>
-        <h2>+{this.state.stats[statModName]}</h2>
+        <h2>+{this.state.stats[statVarName].mod}</h2>
         <InputGroup className="input--smaller mx-auto">
           <FormControl
-            value={this.state.stats[statVarName]}
+            value={this.state.stats[statVarName].points}
             className="input--stats"
             aria-label="input"
             aria-describedby={statName}
@@ -150,10 +278,13 @@ class App extends Component {
               this.setState({
                 stats: {
                   ...this.state.stats,
-                  [statVarName]: event.target.value
+                  [statVarName]: {
+                    ...this.state.stats[statVarName],
+                    points: event.target.value
+                  }
                 }
               });
-              this.calculateStatModifier(statModName, event.target.value);
+              this.calculateStatModifier(statVarName, event.target.value);
             }}
           />
         </InputGroup>
@@ -161,57 +292,54 @@ class App extends Component {
     );
   }
 
-  renderSkillCards(skillName, relatedStat) {
-    const skillProf = skillName.toLowerCase() + "Prof";
-    const skillExp = skillName.toLowerCase() + "Exp";
+  renderSkillCards(skillName, skillVarName, relatedStat) {
+    const relatedStatShorthand = relatedStat.substring(0, 3);
+
     return (
       <ListGroup.Item className="py-0">
         <Row className="py-0">
-          <Col lg="2" className="text-center px-0">
-            <p>Prof.</p>
-          </Col>
-          <Col lg="2" className="text-center px-0">
-            <p>Exp.</p>
-          </Col>
-          <Col lg="8 text-right">
-            {skillName} <Badge variant="secondary">{relatedStat}</Badge>
-          </Col>
-        </Row>
-        <Row className="py-0">
-          <Col lg="2">
+          <Col lg="1" className="text-center">
+            <span>P</span>
             <input
               type="checkbox"
-              checked={this.state.skills[skillProf]}
+              checked={this.state.skills[skillVarName].prof}
               onChange={event => {
-                this.setState({
-                  skills: {
-                    ...this.state.skills,
-                    [skillProf]: !this.state.skills[skillProf]
-                  }
-                });
+                this.calculateSkillModifier(
+                  skillVarName,
+                  relatedStat,
+                  true,
+                  false
+                );
               }}
               aria-label="Checkbox"
-              aria-describedby={relatedStat}
+              aria-describedby={relatedStatShorthand}
             />
           </Col>
-          <Col lg="2">
+          <Col lg="1" className="text-center">
+            <span>E</span>
             <input
               type="checkbox"
-              checked={this.state.skills[skillExp]}
+              checked={this.state.skills[skillVarName].exp}
               onChange={event => {
-                this.setState({
-                  skills: {
-                    ...this.state.skills,
-                    [skillExp]: !this.state.skills[skillExp]
-                  }
-                });
+                this.calculateSkillModifier(
+                  skillVarName,
+                  relatedStat,
+                  false,
+                  true
+                );
               }}
               aria-label="Checkbox"
-              aria-describedby={relatedStat}
+              aria-describedby={relatedStatShorthand}
             />
           </Col>
-          <Col lg="8 text-right">
-            <h5>+2</h5>
+          <Col lg="7 text-right">
+            {skillName}{" "}
+            <Badge variant="secondary">{relatedStatShorthand}</Badge>
+          </Col>
+          <Col lg="2">
+            <span className="skill-modifier">
+              +{this.state.skills[skillVarName].mod}
+            </span>
           </Col>
         </Row>
       </ListGroup.Item>
@@ -335,24 +463,47 @@ class App extends Component {
         <Row>
           <Col lg="3">
             <ListGroup>
-              {this.renderSkillCards("Acrobatics", "Dex")}
-              {this.renderSkillCards("Animal Handling", "Wis")}
-              {this.renderSkillCards("Arcana", "Int")}
-              {this.renderSkillCards("Athletics", "Str")}
-              {this.renderSkillCards("Deception", "Cha")}
-              {this.renderSkillCards("History", "Int")}
-              {this.renderSkillCards("Insight", "Wis")}
-              {this.renderSkillCards("Intimidation", "Cha")}
-              {this.renderSkillCards("Investigation", "Int")}
-              {this.renderSkillCards("Medicine", "Wis")}
-              {this.renderSkillCards("Nature", "Int")}
-              {this.renderSkillCards("Perception", "Wis")}
-              {this.renderSkillCards("Performance", "Cha")}
-              {this.renderSkillCards("Persuasion", "Cha")}
-              {this.renderSkillCards("Religion", "Int")}
-              {this.renderSkillCards("Sleight of Hand", "Dex")}
-              {this.renderSkillCards("Stealth", "Dex")}
-              {this.renderSkillCards("Survival", "Wis")}
+              <ListGroup.Item className="py-0 text-center">
+                <h5>Skills</h5>
+                <span>
+                  P = Proficient
+                  <br />E = Expert
+                </span>
+              </ListGroup.Item>
+              {this.renderSkillCards("Acrobatics", "acrobatics", "Dexterity")}
+              {this.renderSkillCards(
+                "Animal Handling",
+                "animalHandling",
+                "Wisdom"
+              )}
+              {this.renderSkillCards("Arcana", "arcana", "Intelligence")}
+              {this.renderSkillCards("Athletics", "athletics", "Strength")}
+              {this.renderSkillCards("Deception", "deception", "Charisma")}
+              {this.renderSkillCards("History", "history", "Intelligence")}
+              {this.renderSkillCards("Insight", "insight", "Wisdom")}
+              {this.renderSkillCards(
+                "Intimidation",
+                "intimidation",
+                "Charisma"
+              )}
+              {this.renderSkillCards(
+                "Investigation",
+                "investigation",
+                "Intelligence"
+              )}
+              {this.renderSkillCards("Medicine", "medicine", "Wisdom")}
+              {this.renderSkillCards("Nature", "nature", "Intelligence")}
+              {this.renderSkillCards("Perception", "perception", "Wisdom")}
+              {this.renderSkillCards("Performance", "performance", "Charisma")}
+              {this.renderSkillCards("Persuasion", "persuasion", "Charisma")}
+              {this.renderSkillCards("Religion", "religion", "Intelligence")}
+              {this.renderSkillCards(
+                "Sleight of Hand",
+                "sleightOfHand",
+                "Dexterity"
+              )}
+              {this.renderSkillCards("Stealth", "stealth", "Dexterity")}
+              {this.renderSkillCards("Survival", "survival", "Wisdom")}
             </ListGroup>
           </Col>
         </Row>
