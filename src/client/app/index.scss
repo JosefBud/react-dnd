@@ -9,6 +9,10 @@ body {
   font-family: $rpg-font, serif;
 }
 
+h5 {
+  font-weight: 900;
+}
+
 .input-group-prepend,
 .input-group-append {
   font-family: $old-timey-font, serif;
@@ -23,7 +27,7 @@ body {
   position: absolute;
   left: 2.5%;
   top: 5%;
-  opacity: 0.4;
+  opacity: 0.05;
   width: 95%;
   //height: auto;
   z-index: -1;
@@ -72,8 +76,8 @@ body {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: #ffffff;
-  border: 1px solid #000;
+  background-color: $white;
+  border: 1px solid $black;
   width: 1.2em;
   height: 1.2em;
   border-radius: 0.3rem;
@@ -83,4 +87,25 @@ body {
 
 .checkbox:checked {
   background-color: #f00;
+}
+
+.background--fill {
+  background: $white;
+}
+
+.button--smaller-text .btn {
+  font-size: 0.6em;
+}
+
+.input-group input.form-control {
+  background: none;
+  border: none;
+  border-bottom: 2px solid $black;
+  border-radius: 2px;
+
+  &:focus,
+  &:hover {
+    //background: #fd0;
+    background: rgba(255, 200, 0, 0.25);
+  }
 }

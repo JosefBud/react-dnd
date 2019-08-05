@@ -7,13 +7,16 @@ import {
 import {
   SET_XP,
   SET_LEVEL,
+  SET_MAX_HP,
+  SET_CURRENT_HP,
   SET_STAT_POINTS,
   SET_STAT_MODS,
   SET_SKILL_MODS,
   SET_SKILL_PROF,
   SET_SKILL_EXP,
   SET_SAVING_THROW_MOD,
-  SET_SAVING_THROW_PROF
+  SET_SAVING_THROW_PROF,
+  SET_RESISTANCES
 } from './actions'
 
 function characterXP(state = initialState.characterXP, action) {
@@ -29,6 +32,21 @@ function characterLevel(state = initialState.characterLevel, action) {
   switch (action.type) {
     case SET_LEVEL:
       return action.number;
+    default:
+      return state;
+  }
+}
+
+function hitPoints(state = initialState.hitPoints, action) {
+  switch (action.type) {
+    case SET_MAX_HP:
+      return Object.assign({}, state, {
+        max: action.number
+      });
+    case SET_CURRENT_HP:
+      return Object.assign({}, state, {
+        current: action.number
+      })
     default:
       return state;
   }
@@ -99,6 +117,13 @@ function savingThrows(state = initialState.savingThrows, action) {
           prof: action.boolean
         }
       });
+    case SET_RESISTANCES:
+      return Object.assign({}, state, {
+        chosenResistances: {
+          ...state.chosenResistances,
+          [action.key]: action.name
+        }
+      });
     default:
       return state;
   }
@@ -107,6 +132,7 @@ function savingThrows(state = initialState.savingThrows, action) {
 const todoApp = combineReducers({
   characterXP,
   characterLevel,
+  hitPoints,
   characterStats,
   characterSkills,
   savingThrows

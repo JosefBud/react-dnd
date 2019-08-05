@@ -1,14 +1,27 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import store from "../redux/index";
-import { Row, Col, ListGroup } from "react-bootstrap";
-import { setSavingThrowMod, setSavingThrowProf } from "../redux/actions";
+import {
+  Row,
+  Col,
+  Table,
+  DropdownButton,
+  Dropdown,
+  FormControl
+} from "react-bootstrap";
+import {
+  setSavingThrowMod,
+  setSavingThrowProf,
+  setResistances
+} from "../redux/actions";
 
 class SavingThrows extends Component {
   constructor(props) {
     super(props);
 
     this.calculateSavingThrowMod = this.calculateSavingThrowMod.bind(this);
+    this.renderSavingThrows = this.renderSavingThrows.bind(this);
+    this.renderResistances = this.renderResistances.bind(this);
   }
 
   calculateSavingThrowMod(statName) {
@@ -23,63 +36,132 @@ class SavingThrows extends Component {
     store.dispatch(setSavingThrowMod(statName, baseModifier));
   }
 
-  renderSavingThrows(statName, shortenedName) {
+  renderSavingThrows(statName1, shortenedName1, statName2, shortenedName2) {
     return (
-      <ListGroup.Item className="flex-fill border-top-0">
-        <input
-          type="checkbox"
-          className="checkbox"
-          checked={this.props.savingThrows[statName].prof}
-          onChange={event => {
-            this.calculateSavingThrowMod(statName);
-          }}
-          aria-label="Checkbox"
-          aria-describedby={statName}
-        />
-        <span className="skill-modifier px-2">
-          +{this.props.savingThrows[statName].mod}
-        </span>
-        <span>{shortenedName}</span>
-      </ListGroup.Item>
+      <tr>
+        <td className="py-1">
+          <input
+            type="checkbox"
+            className="checkbox"
+            checked={this.props.savingThrows[statName1].prof}
+            onChange={event => {
+              this.calculateSavingThrowMod(statName1);
+            }}
+            aria-label="Checkbox"
+            aria-describedby={statName1}
+          />
+          <span className="skill-modifier px-2">
+            +{this.props.savingThrows[statName1].mod}
+          </span>
+          <span>{shortenedName1}</span>
+        </td>
+        <td className="py-1">
+          <input
+            type="checkbox"
+            className="checkbox"
+            checked={this.props.savingThrows[statName2].prof}
+            onChange={event => {
+              this.calculateSavingThrowMod(statName2);
+            }}
+            aria-label="Checkbox"
+            aria-describedby={statName2}
+          />
+          <span className="skill-modifier px-2">
+            +{this.props.savingThrows[statName2].mod}
+          </span>
+          <span>{shortenedName2}</span>
+        </td>
+      </tr>
     );
   }
+
+  renderResistances(key) {
+    return (
+      <tr>
+        <td className="p-1">
+          <DropdownButton
+            className="w-100 button--smaller-text"
+            title={this.props.savingThrows.chosenResistances[key]}
+            key={key}
+          >
+            {this.props.savingThrows.allResistances.map((resistance, index) => {
+              return (
+                <Dropdown.Item
+                  key={index}
+                  onSelect={(eventKey, event) => {
+                    store.dispatch(setResistances(key, event.target.innerHTML));
+                  }}
+                >
+                  {resistance}
+                </Dropdown.Item>
+              );
+            })}
+          </DropdownButton>
+        </td>
+        <td className="p-1">
+          <DropdownButton
+            className="w-100 button--smaller-text"
+            title={this.props.savingThrows.chosenResistances[key + 1]}
+            key={key + 1}
+          >
+            {this.props.savingThrows.allResistances.map((resistance, index) => {
+              return (
+                <Dropdown.Item
+                  key={index}
+                  onSelect={(eventKey, event) => {
+                    store.dispatch(
+                      setResistances(key + 1, event.target.innerHTML)
+                    );
+                  }}
+                >
+                  {resistance}
+                </Dropdown.Item>
+              );
+            })}
+          </DropdownButton>
+        </td>
+      </tr>
+    );
+  }
+
   render() {
     return (
-      <Row>
-        <Col>
-          <Row>
-            <Col className="text-center">
-              <ListGroup.Item>
-                <h5 className="my-0">Saving Throws</h5>
-              </ListGroup.Item>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <ListGroup className="list-group-horizontal w-100">
-                {this.renderSavingThrows("strength", "Str")}
-                {this.renderSavingThrows("intelligence", "Int")}
-              </ListGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <ListGroup className="list-group-horizontal w-100">
-                {this.renderSavingThrows("dexterity", "Dex")}
-                {this.renderSavingThrows("wisdom", "Wis")}
-              </ListGroup>
-            </Col>
-          </Row>
-          <Row>
-            <Col>
-              <ListGroup className="list-group-horizontal w-100">
-                {this.renderSavingThrows("constitution", "Con")}
-                {this.renderSavingThrows("charisma", "Cha")}
-              </ListGroup>
-            </Col>
-          </Row>
-        </Col>
-      </Row>
+      <Table className="" borderless>
+        <thead className="text-center">
+          <tr>
+            <th colSpan="2">
+              <h5>Saving Throws</h5>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderSavingThrows("strength", "Str", "intelligence", "Int")}
+          {this.renderSavingThrows("dexterity", "Dex", "wisdom", "Wis")}
+          {this.renderSavingThrows("constitution", "Con", "charisma", "Cha")}
+        </tbody>
+        <thead className="text-center">
+          <tr>
+            <th colSpan="2">Resistances</th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderResistances(1)}
+          {this.renderResistances(3)}
+          {this.renderResistances(5)}
+        </tbody>
+        <thead className="text-center">
+          <tr>
+            <th colSpan="2">Additional</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td colSpan="2">
+              <FormControl as="textarea" rows="3" />
+            </td>
+          </tr>
+        </tbody>
+      </Table>
     );
   }
 }

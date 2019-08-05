@@ -102,10 +102,8 @@ class CharacterSkills extends Component {
         <ListGroup>
           <ListGroup.Item className="py-0 text-center">
             <h5>Skills</h5>
-            <span>
-              P = Proficient
-              <br />E = Expert
-            </span>
+            <span className="border-right px-2">P = Proficient</span>
+            <span className="border-left px-2">E = Expert</span>
           </ListGroup.Item>
           {this.renderSkillCards("Acrobatics", "acrobatics", "Dexterity")}
           {this.renderSkillCards("Animal Handling", "animalHandling", "Wisdom")}

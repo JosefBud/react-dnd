@@ -1,6 +1,10 @@
 const initialState = {
   characterXP: 0,
   characterLevel: 1,
+  hitPoints: {
+    max: 0,
+    current: 0
+  },
   characterStats: {
     strength: {
       points: 0,
@@ -156,6 +160,15 @@ const initialState = {
       mod: 0,
       prof: false
     },
+    allResistances: ["None", "Acid", "Bludgeoning", "Cold", "Fire", "Force", "Lightning", "Necrotic", "Piercing", "Poison", "Psychic", "Radiant", "Slashing", "Thunder"],
+    chosenResistances: {
+      1: "None",
+      2: "None",
+      3: "None",
+      4: "None",
+      5: "None",
+      6: "None"
+    }
   }
 }
 

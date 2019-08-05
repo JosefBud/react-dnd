@@ -1,5 +1,7 @@
 export const SET_XP = 'SET_XP'
 export const SET_LEVEL = 'SET_LEVEL';
+export const SET_MAX_HP = 'SET_MAX_HP';
+export const SET_CURRENT_HP = 'SET_CURRENT_HP';
 export const SET_STAT_POINTS = 'SET_STAT_POINTS';
 export const SET_STAT_MODS = 'SET_STAT_MODS';
 export const SET_SKILL_MODS = 'SET_SKILL_MODS';
@@ -7,6 +9,7 @@ export const SET_SKILL_PROF = 'SET_SKILL_PROF';
 export const SET_SKILL_EXP = 'SET_SKILL_EXP';
 export const SET_SAVING_THROW_MOD = 'SET_SAVING_THROW_MOD';
 export const SET_SAVING_THROW_PROF = 'SET_SAVING_THROW_PROF';
+export const SET_RESISTANCES = 'SET_RESISTANCES';
 
 export function setXP(number) {
   return {
@@ -18,6 +21,20 @@ export function setXP(number) {
 export function setLevel(number) {
   return {
     type: SET_LEVEL,
+    number
+  }
+}
+
+export function setMaxHP(number) {
+  return {
+    type: SET_MAX_HP,
+    number
+  }
+}
+
+export function setCurrentHP(number) {
+  return {
+    type: SET_CURRENT_HP,
     number
   }
 }
@@ -75,5 +92,13 @@ export function setSavingThrowProf(name, boolean) {
     type: SET_SAVING_THROW_PROF,
     name,
     boolean
+  }
+}
+
+export function setResistances(key, name) {
+  return {
+    type: SET_RESISTANCES,
+    key,
+    name
   }
 }
