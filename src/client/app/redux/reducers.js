@@ -1,137 +1,4 @@
-const initialState = {
-  characterXP: 0,
-  characterLevel: 1,
-  characterStats: {
-    strength: {
-      points: 0,
-      mod: 0,
-      related: ["athletics"]
-    },
-    dexterity: {
-      points: 0,
-      mod: 0,
-      related: ["acrobatics", "sleightOfHand", "stealth"]
-    },
-    constitution: {
-      points: 0,
-      mod: 0,
-      related: []
-    },
-    intelligence: {
-      points: 0,
-      mod: 0,
-      related: ["arcana", "history", "investigation", "nature", "religion"]
-    },
-    wisdom: {
-      points: 0,
-      mod: 0,
-      related: [
-        "animalHandling",
-        "insight",
-        "medicine",
-        "perception",
-        "survival"
-      ]
-    },
-    charisma: {
-      points: 0,
-      mod: 0,
-      related: ["deception", "intimidation", "performance", "persuasion"]
-    }
-  },
-  characterSkills: {
-    acrobatics: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    animalHandling: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    arcana: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    athletics: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    deception: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    history: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    insight: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    intimidation: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    investigation: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    medicine: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    nature: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    perception: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    performance: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    persuasion: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    religion: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    sleightOfHand: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    stealth: {
-      mod: 0,
-      prof: false,
-      exp: false
-    },
-    survival: {
-      mod: 0,
-      prof: false,
-      exp: false
-    }
-  }
-};
+import initialState from './initialState';
 
 import {
   combineReducers
@@ -144,7 +11,9 @@ import {
   SET_STAT_MODS,
   SET_SKILL_MODS,
   SET_SKILL_PROF,
-  SET_SKILL_EXP
+  SET_SKILL_EXP,
+  SET_SAVING_THROW_MOD,
+  SET_SAVING_THROW_PROF
 } from './actions'
 
 function characterXP(state = initialState.characterXP, action) {
@@ -214,11 +83,33 @@ function characterSkills(state = initialState.characterSkills, action) {
   }
 }
 
+function savingThrows(state = initialState.savingThrows, action) {
+  switch (action.type) {
+    case SET_SAVING_THROW_MOD:
+      return Object.assign({}, state, {
+        [action.name]: {
+          ...state[action.name],
+          mod: action.number
+        }
+      });
+    case SET_SAVING_THROW_PROF:
+      return Object.assign({}, state, {
+        [action.name]: {
+          ...state[action.name],
+          prof: action.boolean
+        }
+      });
+    default:
+      return state;
+  }
+}
+
 const todoApp = combineReducers({
   characterXP,
   characterLevel,
   characterStats,
-  characterSkills
+  characterSkills,
+  savingThrows
 })
 
 export default todoApp

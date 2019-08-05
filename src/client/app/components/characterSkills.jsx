@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import store from "../redux/index";
-import { Container, Row, Col, Badge, ListGroup } from "react-bootstrap";
+import { Row, Col, Badge, ListGroup } from "react-bootstrap";
 import { setSkillMods, setSkillProf, setSkillExp } from "../redux/actions";
 
 class CharacterSkills extends Component {
@@ -47,9 +47,10 @@ class CharacterSkills extends Component {
       <ListGroup.Item className="py-0">
         <Row className="py-0">
           <Col lg="1" className="text-center">
-            <span>P</span>
+            <span className="font-weight-bold">P</span>
             <input
               type="checkbox"
+              className="checkbox"
               checked={this.props.characterSkills[skillVarName].prof}
               onChange={event => {
                 this.calculateSkillModifier(
@@ -64,9 +65,10 @@ class CharacterSkills extends Component {
             />
           </Col>
           <Col lg="1" className="text-center">
-            <span>E</span>
+            <span className="font-weight-bold">E</span>
             <input
               type="checkbox"
+              className="checkbox"
               checked={this.props.characterSkills[skillVarName].exp}
               onChange={event => {
                 this.calculateSkillModifier(

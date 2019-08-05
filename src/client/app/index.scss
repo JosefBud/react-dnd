@@ -1,8 +1,9 @@
 @import "~bootstrap/scss/bootstrap";
-@import url('https://fonts.googleapis.com/css?family=Cinzel|IM+Fell+English+SC&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Cinzel|Scope+One|IM+Fell+English+SC&display=swap');
 
 $old-timey-font: 'IM Fell English SC';
 $rpg-font: 'Cinzel';
+//$rpg-font: 'Scope One';
 
 body {
   font-family: $rpg-font, serif;
@@ -28,9 +29,9 @@ body {
   z-index: -1;
 }
 
-.row {
+/* .row {
   padding-top: 8px;
-}
+} */
 
 .dropdown .btn {
   width: 100%;
@@ -65,4 +66,21 @@ body {
 .skill-modifier {
   font-weight: 900;
   font-size: 1.1em;
+}
+
+.checkbox {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid #000;
+  width: 1.2em;
+  height: 1.2em;
+  border-radius: 0.3rem;
+  outline: 0;
+  vertical-align: middle;
+}
+
+.checkbox:checked {
+  background-color: #f00;
 }

@@ -10,7 +10,12 @@ import {
   CardGroup
 } from "react-bootstrap";
 
-import { setStatPoints, setStatMods, setSkillMods } from "../redux/actions";
+import {
+  setStatPoints,
+  setStatMods,
+  setSkillMods,
+  setSavingThrowMod
+} from "../redux/actions";
 
 class CharacterStats extends Component {
   constructor(props) {
@@ -31,6 +36,7 @@ class CharacterStats extends Component {
       store.dispatch(setSkillMods(skill, modifier));
     });
 
+    store.dispatch(setSavingThrowMod(statName, modifier));
     store.dispatch(setStatMods(statName, modifier));
   }
 
