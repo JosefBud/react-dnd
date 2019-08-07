@@ -13,6 +13,7 @@ export const SET_SAVING_THROW_MOD = 'SET_SAVING_THROW_MOD';
 export const SET_SAVING_THROW_PROF = 'SET_SAVING_THROW_PROF';
 export const SET_RESISTANCES = 'SET_RESISTANCES';
 export const SET_DEATH_SAVES = 'SET_DEATH_SAVES';
+export const SET_SPEED = 'SET_SPEED';
 
 export function setXP(number) {
   return {
@@ -125,5 +126,13 @@ export function setDeathSaves(name, index) {
     type: SET_DEATH_SAVES,
     name,
     index
+  }
+}
+
+export function setSpeed(name, number) {
+  return {
+    type: SET_SPEED,
+    name,
+    number
   }
 }

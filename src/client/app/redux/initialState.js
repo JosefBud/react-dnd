@@ -11,6 +11,10 @@ const initialState = {
     successes: [false, false, false],
     failures: [false, false, false]
   },
+  speed: {
+    normal: 0,
+    encumbered: 0
+  },
   characterStats: {
     strength: {
       points: 0,

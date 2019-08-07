@@ -18,7 +18,8 @@ import {
   setCurrentHP,
   setUsedHitDice,
   setRemainingHitDice,
-  setDeathSaves
+  setDeathSaves,
+  setSpeed
 } from "../redux/actions";
 
 class HitPoints extends Component {
@@ -32,6 +33,8 @@ class HitPoints extends Component {
     this.subtractHP = this.subtractHP.bind(this);
     this.addHP = this.addHP.bind(this);
     this.handleHitDice = this.handleHitDice.bind(this);
+    this.renderDeathSaves = this.renderDeathSaves.bind(this);
+    this.renderSpeed = this.renderSpeed.bind(this);
   }
 
   /*   componentDidMount() {
@@ -68,6 +71,28 @@ class HitPoints extends Component {
           store.dispatch(setDeathSaves(type, index));
         }}
       />
+    );
+  }
+
+  renderSpeed(name) {
+    return (
+      <Row>
+        <Col lg={{ span: 6, offset: 2 }} className="px-0">
+          <InputGroup className="input--smaller mx-auto pb-2">
+            <FormControl
+              value={this.props.speed.normal}
+              className="input--stats"
+              type="number"
+              onChange={event => {
+                store.dispatch(setSpeed(name, parseInt(event.target.value)));
+              }}
+            />
+          </InputGroup>
+        </Col>
+        <Col lg="auto" className="pt-2 pl-1">
+          <span>feet</span>
+        </Col>
+      </Row>
     );
   }
 
@@ -188,13 +213,9 @@ class HitPoints extends Component {
         <Row>
           <Col className="px-0 pt-3">
             <h5>Speed</h5>
-            <InputGroup className="input--smaller mx-auto pb-2">
-              <FormControl className="input--stats" type="number" />
-            </InputGroup>
+            {this.renderSpeed("normal")}
             <span>Encumbered</span>
-            <InputGroup className="input--smaller mx-auto">
-              <FormControl className="input--stats" type="number" />
-            </InputGroup>
+            {this.renderSpeed("encumbered")}
           </Col>
         </Row>
       </div>
@@ -206,6 +227,7 @@ const mapStateToProps = state => {
   return {
     hitPoints: state.hitPoints,
     deathSaves: state.deathSaves,
+    speed: state.speed,
     characterLevel: state.characterLevel,
     constitutionMod: state.characterStats.constitution.mod
   };

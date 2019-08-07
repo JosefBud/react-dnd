@@ -19,7 +19,8 @@ import {
   SET_SAVING_THROW_MOD,
   SET_SAVING_THROW_PROF,
   SET_RESISTANCES,
-  SET_DEATH_SAVES
+  SET_DEATH_SAVES,
+  SET_SPEED
 } from './actions'
 
 function characterXP(state = initialState.characterXP, action) {
@@ -157,47 +158,26 @@ function deathSaves(state = initialState.deathSaves, action) {
   }
 }
 
-const todoApp = combineReducers({
+function speed(state = initialState.speed, action) {
+  switch (action.type) {
+    case SET_SPEED:
+      return Object.assign({}, state, {
+        [action.name]: action.number
+      })
+    default:
+      return state;
+  }
+}
+
+const allReducers = combineReducers({
   characterXP,
   characterLevel,
   hitPoints,
   characterStats,
   characterSkills,
   savingThrows,
-  deathSaves
+  deathSaves,
+  speed
 })
 
-export default todoApp
-
-/* function visibilityFilter(state = SHOW_ALL, action) {
-  switch (action.type) {
-    case SET_VISIBILITY_FILTER:
-      return action.filter
-    default:
-      return state
-  }
-}
-
-function todos(state = [], action) {
-  switch (action.type) {
-    case ADD_TODO:
-      return [
-        ...state,
-        {
-          text: action.text,
-          completed: false
-        }
-      ]
-    case TOGGLE_TODO:
-      return state.map((todo, index) => {
-        if (index === action.index) {
-          return Object.assign({}, todo, {
-            completed: !todo.completed
-          })
-        }
-        return todo
-      })
-    default:
-      return state
-  }
-} */
+export default allReducers
