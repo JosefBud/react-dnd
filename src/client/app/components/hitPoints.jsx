@@ -80,7 +80,7 @@ class HitPoints extends Component {
         <Col lg={{ span: 6, offset: 2 }} className="px-0">
           <InputGroup className="input--smaller mx-auto pb-2">
             <FormControl
-              value={this.props.speed.normal}
+              value={this.props.speed[name]}
               className="input--stats"
               type="number"
               onChange={event => {

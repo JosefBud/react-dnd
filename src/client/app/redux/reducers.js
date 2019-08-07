@@ -144,14 +144,10 @@ function savingThrows(state = initialState.savingThrows, action) {
 function deathSaves(state = initialState.deathSaves, action) {
   switch (action.type) {
     case SET_DEATH_SAVES:
+      let freshArray = state[action.name];
+      freshArray[action.index] = !freshArray[action.index];
       return Object.assign({}, state, {
-        [action.name]: state[action.name].map((value, index) => {
-          if ([action.index] === index) {
-            return !value;
-          } else {
-            return value;
-          }
-        })
+        [action.name]: freshArray
       });
     default:
       return state;
