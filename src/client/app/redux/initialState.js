@@ -3,7 +3,13 @@ const initialState = {
   characterLevel: 1,
   hitPoints: {
     max: 0,
-    current: 0
+    current: 0,
+    usedHitDice: 0,
+    remainingHitDice: 0
+  },
+  deathSaves: {
+    successes: [false, false, false],
+    failures: [false, false, false]
   },
   characterStats: {
     strength: {

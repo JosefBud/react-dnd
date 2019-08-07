@@ -2,6 +2,8 @@ export const SET_XP = 'SET_XP'
 export const SET_LEVEL = 'SET_LEVEL';
 export const SET_MAX_HP = 'SET_MAX_HP';
 export const SET_CURRENT_HP = 'SET_CURRENT_HP';
+export const SET_USED_HIT_DICE = 'SET_USED_HIT_DICE';
+export const SET_REMAINING_HIT_DICE = 'SET_REMAINING_HIT_DICE';
 export const SET_STAT_POINTS = 'SET_STAT_POINTS';
 export const SET_STAT_MODS = 'SET_STAT_MODS';
 export const SET_SKILL_MODS = 'SET_SKILL_MODS';
@@ -10,6 +12,7 @@ export const SET_SKILL_EXP = 'SET_SKILL_EXP';
 export const SET_SAVING_THROW_MOD = 'SET_SAVING_THROW_MOD';
 export const SET_SAVING_THROW_PROF = 'SET_SAVING_THROW_PROF';
 export const SET_RESISTANCES = 'SET_RESISTANCES';
+export const SET_DEATH_SAVES = 'SET_DEATH_SAVES';
 
 export function setXP(number) {
   return {
@@ -36,6 +39,20 @@ export function setCurrentHP(number) {
   return {
     type: SET_CURRENT_HP,
     number
+  }
+}
+
+export function setUsedHitDice(number) {
+  return {
+    type: SET_USED_HIT_DICE,
+    number
+  }
+}
+
+export function setRemainingHitDice(level) {
+  return {
+    type: SET_REMAINING_HIT_DICE,
+    level
   }
 }
 
@@ -100,5 +117,13 @@ export function setResistances(key, name) {
     type: SET_RESISTANCES,
     key,
     name
+  }
+}
+
+export function setDeathSaves(name, index) {
+  return {
+    type: SET_DEATH_SAVES,
+    name,
+    index
   }
 }

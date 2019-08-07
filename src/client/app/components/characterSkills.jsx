@@ -44,7 +44,7 @@ class CharacterSkills extends Component {
     const relatedStatShorthand = relatedStat.substring(0, 3);
 
     return (
-      <ListGroup.Item className="py-0">
+      <ListGroup.Item className="pt-0 pb-1">
         <Row className="py-0">
           <Col lg="1" className="text-center">
             <span className="font-weight-bold">P</span>
@@ -100,7 +100,7 @@ class CharacterSkills extends Component {
     return (
       <Col lg="3">
         <ListGroup>
-          <ListGroup.Item className="py-0 text-center">
+          <ListGroup.Item className="py-2 text-center">
             <h5>Skills</h5>
             <span className="border-right px-2">P = Proficient</span>
             <span className="border-left px-2">E = Expert</span>

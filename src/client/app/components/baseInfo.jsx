@@ -10,7 +10,7 @@ import {
   Dropdown,
   DropdownButton
 } from "react-bootstrap";
-import { setXP, setLevel } from "../redux/actions";
+import { setXP, setLevel, setRemainingHitDice } from "../redux/actions";
 
 class BaseInfo extends Component {
   constructor(props) {
@@ -86,11 +86,13 @@ class BaseInfo extends Component {
                 </InputGroup.Prepend>
                 <FormControl
                   value={this.props.characterLevel}
+                  className="input--stats"
                   aria-label="input"
                   type="number"
                   aria-describedby="Character Level"
                   onChange={event => {
                     store.dispatch(setLevel(parseInt(event.target.value)));
+                    store.dispatch(setRemainingHitDice(parseInt(event.target.value)));
                   }}
                 />
               </InputGroup>
@@ -102,6 +104,7 @@ class BaseInfo extends Component {
                 </InputGroup.Prepend>
                 <FormControl
                   value={this.props.characterXP}
+                  className="input--stats"
                   type="number"
                   aria-label="input"
                   aria-describedby="Character XP"

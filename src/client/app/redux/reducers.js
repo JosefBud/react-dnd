@@ -9,6 +9,8 @@ import {
   SET_LEVEL,
   SET_MAX_HP,
   SET_CURRENT_HP,
+  SET_USED_HIT_DICE,
+  SET_REMAINING_HIT_DICE,
   SET_STAT_POINTS,
   SET_STAT_MODS,
   SET_SKILL_MODS,
@@ -16,7 +18,8 @@ import {
   SET_SKILL_EXP,
   SET_SAVING_THROW_MOD,
   SET_SAVING_THROW_PROF,
-  SET_RESISTANCES
+  SET_RESISTANCES,
+  SET_DEATH_SAVES
 } from './actions'
 
 function characterXP(state = initialState.characterXP, action) {
@@ -46,6 +49,14 @@ function hitPoints(state = initialState.hitPoints, action) {
     case SET_CURRENT_HP:
       return Object.assign({}, state, {
         current: action.number
+      });
+    case SET_USED_HIT_DICE:
+      return Object.assign({}, state, {
+        usedHitDice: action.number
+      });
+    case SET_REMAINING_HIT_DICE:
+      return Object.assign({}, state, {
+        remainingHitDice: action.level - state.usedHitDice
       })
     default:
       return state;
@@ -129,13 +140,31 @@ function savingThrows(state = initialState.savingThrows, action) {
   }
 }
 
+function deathSaves(state = initialState.deathSaves, action) {
+  switch (action.type) {
+    case SET_DEATH_SAVES:
+      return Object.assign({}, state, {
+        [action.name]: state[action.name].map((value, index) => {
+          if ([action.index] === index) {
+            return !value;
+          } else {
+            return value;
+          }
+        })
+      });
+    default:
+      return state;
+  }
+}
+
 const todoApp = combineReducers({
   characterXP,
   characterLevel,
   hitPoints,
   characterStats,
   characterSkills,
-  savingThrows
+  savingThrows,
+  deathSaves
 })
 
 export default todoApp
