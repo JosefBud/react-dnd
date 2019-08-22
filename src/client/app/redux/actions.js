@@ -14,6 +14,7 @@ export const SET_SAVING_THROW_PROF = 'SET_SAVING_THROW_PROF';
 export const SET_RESISTANCES = 'SET_RESISTANCES';
 export const SET_DEATH_SAVES = 'SET_DEATH_SAVES';
 export const SET_SPEED = 'SET_SPEED';
+export const SET_PASSIVE_WISDOM = 'SET_PASSIVE_WISDOM';
 
 export function setXP(number) {
   return {
@@ -133,6 +134,13 @@ export function setSpeed(name, number) {
   return {
     type: SET_SPEED,
     name,
+    number
+  }
+}
+
+export function setPassiveWisdom(number) {
+  return {
+    type: SET_PASSIVE_WISDOM,
     number
   }
 }

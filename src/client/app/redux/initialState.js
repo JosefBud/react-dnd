@@ -179,7 +179,8 @@ const initialState = {
       5: "None",
       6: "None"
     }
-  }
+  },
+  passiveWisdom: 10
 }
 
 export default initialState;

@@ -20,7 +20,8 @@ import {
   SET_SAVING_THROW_PROF,
   SET_RESISTANCES,
   SET_DEATH_SAVES,
-  SET_SPEED
+  SET_SPEED,
+  SET_PASSIVE_WISDOM
 } from './actions'
 
 function characterXP(state = initialState.characterXP, action) {
@@ -165,6 +166,15 @@ function speed(state = initialState.speed, action) {
   }
 }
 
+function passiveWisdom(state = initialState.passiveWisdom, action) {
+  switch (action.type) {
+    case SET_PASSIVE_WISDOM:
+      return action.number;
+    default:
+      return state;
+  }
+}
+
 const allReducers = combineReducers({
   characterXP,
   characterLevel,
@@ -173,7 +183,8 @@ const allReducers = combineReducers({
   characterSkills,
   savingThrows,
   deathSaves,
-  speed
+  speed,
+  passiveWisdom
 })
 
 export default allReducers

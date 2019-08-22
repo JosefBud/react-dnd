@@ -126,42 +126,56 @@ class SavingThrows extends Component {
 
   render() {
     return (
-      <Table className="" borderless>
-        <thead className="text-center">
-          <tr>
-            <th colSpan="2">
-              <h5>Saving Throws</h5>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.renderSavingThrows("strength", "Str", "intelligence", "Int")}
-          {this.renderSavingThrows("dexterity", "Dex", "wisdom", "Wis")}
-          {this.renderSavingThrows("constitution", "Con", "charisma", "Cha")}
-        </tbody>
-        <thead className="text-center">
-          <tr>
-            <th colSpan="2">Resistances</th>
-          </tr>
-        </thead>
-        <tbody>
-          {this.renderResistances(1)}
-          {this.renderResistances(3)}
-          {this.renderResistances(5)}
-        </tbody>
-        <thead className="text-center">
-          <tr>
-            <th colSpan="2">Additional</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td colSpan="2">
-              <FormControl as="textarea" rows="3" />
-            </td>
-          </tr>
-        </tbody>
-      </Table>
+      <Row>
+        <Col>
+          <Table className="mb-0" borderless>
+            <thead className="text-center">
+              <tr>
+                <th colSpan="2">
+                  <h5>Saving Throws</h5>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderSavingThrows(
+                "strength",
+                "Str",
+                "intelligence",
+                "Int"
+              )}
+              {this.renderSavingThrows("dexterity", "Dex", "wisdom", "Wis")}
+              {this.renderSavingThrows(
+                "constitution",
+                "Con",
+                "charisma",
+                "Cha"
+              )}
+            </tbody>
+            <thead className="text-center">
+              <tr>
+                <th colSpan="2">Resistances</th>
+              </tr>
+            </thead>
+            <tbody>
+              {this.renderResistances(1)}
+              {this.renderResistances(3)}
+              {this.renderResistances(5)}
+            </tbody>
+            <thead className="text-center">
+              <tr>
+                <th colSpan="2">Additional</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colSpan="2">
+                  <FormControl as="textarea" rows="3" />
+                </td>
+              </tr>
+            </tbody>
+          </Table>
+        </Col>
+      </Row>
     );
   }
 }

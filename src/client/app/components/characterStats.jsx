@@ -14,7 +14,8 @@ import {
   setStatPoints,
   setStatMods,
   setSkillMods,
-  setSavingThrowMod
+  setSavingThrowMod,
+  setPassiveWisdom
 } from "../redux/actions";
 
 class CharacterStats extends Component {
@@ -38,6 +39,9 @@ class CharacterStats extends Component {
 
     store.dispatch(setSavingThrowMod(statName, modifier));
     store.dispatch(setStatMods(statName, modifier));
+    if (statName === "wisdom") {
+      store.dispatch(setPassiveWisdom(10 + modifier));
+    }
   }
 
   renderStatCards(statName) {
@@ -87,7 +91,8 @@ class CharacterStats extends Component {
 const mapStateToProps = state => {
   return {
     characterStats: state.characterStats,
-    characterSkills: state.characterSkills
+    characterSkills: state.characterSkills,
+    passiveWisdom: state.passiveWisdom
   };
 };
 
