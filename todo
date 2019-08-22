@@ -1,3 +1,11 @@
 Hit dice are based on character class
+
 Current HP input should probably be bigger
-Speed is based on race and armor: https://www.dandwiki.com/wiki/SRD:Movement_Speed
+
+Speed is based on race and armor: 
+https://www.dandwiki.com/wiki/SRD:Movement_Speed
+
+Text fields should be added to redux state 
+to auto-update from class/background choices
+
+Proficiency bonus = 1 + Math.ceil(level / 4)

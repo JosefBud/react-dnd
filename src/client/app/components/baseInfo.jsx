@@ -10,7 +10,12 @@ import {
   Dropdown,
   DropdownButton
 } from "react-bootstrap";
-import { setXP, setLevel, setRemainingHitDice } from "../redux/actions";
+import {
+  setXP,
+  setLevel,
+  setRemainingHitDice,
+  setProfBonus
+} from "../redux/actions";
 
 class BaseInfo extends Component {
   constructor(props) {
@@ -25,6 +30,54 @@ class BaseInfo extends Component {
 
   handleXPAdd() {
     store.dispatch(setXP(store.getState().characterXP + this.state.addXP));
+    const newXP = store.getState().characterXP;
+
+    function determineLevel() {
+      if (newXP >= 355000) {
+        return 20;
+      } else if (newXP >= 305000) {
+        return 19;
+      } else if (newXP >= 265000) {
+        return 18;
+      } else if (newXP >= 225000) {
+        return 17;
+      } else if (newXP >= 195000) {
+        return 16;
+      } else if (newXP >= 165000) {
+        return 15;
+      } else if (newXP >= 140000) {
+        return 14;
+      } else if (newXP >= 120000) {
+        return 13;
+      } else if (newXP >= 100000) {
+        return 12;
+      } else if (newXP >= 85000) {
+        return 11;
+      } else if (newXP >= 64000) {
+        return 10;
+      } else if (newXP >= 48000) {
+        return 9;
+      } else if (newXP >= 34000) {
+        return 8;
+      } else if (newXP >= 23000) {
+        return 7;
+      } else if (newXP >= 14000) {
+        return 6;
+      } else if (newXP >= 6500) {
+        return 5;
+      } else if (newXP >= 2700) {
+        return 4;
+      } else if (newXP >= 900) {
+        return 3;
+      } else if (newXP >= 300) {
+        return 2;
+      } else {
+        return 1;
+      }
+    }
+
+    const newLevel = determineLevel();
+    store.dispatch(setLevel(newLevel));
   }
 
   render() {
@@ -92,7 +145,9 @@ class BaseInfo extends Component {
                   aria-describedby="Character Level"
                   onChange={event => {
                     store.dispatch(setLevel(parseInt(event.target.value)));
-                    store.dispatch(setRemainingHitDice(parseInt(event.target.value)));
+                    store.dispatch(
+                      setRemainingHitDice(parseInt(event.target.value))
+                    );
                   }}
                 />
               </InputGroup>

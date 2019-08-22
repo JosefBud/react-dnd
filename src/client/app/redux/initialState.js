@@ -180,7 +180,8 @@ const initialState = {
       6: "None"
     }
   },
-  passiveWisdom: 10
+  passiveWisdom: 10,
+  profBonus: 0
 }
 
 export default initialState;

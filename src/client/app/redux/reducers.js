@@ -21,8 +21,18 @@ import {
   SET_RESISTANCES,
   SET_DEATH_SAVES,
   SET_SPEED,
-  SET_PASSIVE_WISDOM
+  SET_PASSIVE_WISDOM,
+  SET_PROF_BONUS
 } from './actions'
+
+function profBonus(state = initialState.profBonus, action) {
+  switch (action.type) {
+    case SET_PROF_BONUS:
+      return action.number;
+    default:
+      return state;
+  }
+}
 
 function characterXP(state = initialState.characterXP, action) {
   switch (action.type) {
@@ -184,7 +194,8 @@ const allReducers = combineReducers({
   savingThrows,
   deathSaves,
   speed,
-  passiveWisdom
+  passiveWisdom,
+  profBonus
 })
 
 export default allReducers
