@@ -16,6 +16,8 @@ export const SET_DEATH_SAVES = 'SET_DEATH_SAVES';
 export const SET_SPEED = 'SET_SPEED';
 export const SET_PASSIVE_WISDOM = 'SET_PASSIVE_WISDOM';
 export const SET_PROF_BONUS = 'SET_PROF_BONUS';
+export const SET_ARMOR_CLASS = 'SET_ARMOR_CLASS';
+export const SET_INITIATIVE = 'SET_INITIATIVE';
 
 export function setXP(number) {
   return {
@@ -149,6 +151,20 @@ export function setPassiveWisdom(number) {
 export function setProfBonus(number) {
   return {
     type: SET_PROF_BONUS,
+    number
+  }
+}
+
+export function setArmorClass(number) {
+  return {
+    type: SET_ARMOR_CLASS,
+    number
+  }
+}
+
+export function setInitative(number) {
+  return {
+    type: SET_INITIATIVE,
     number
   }
 }

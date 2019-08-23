@@ -9,6 +9,7 @@ import CharacterSkillsComp from "./components/characterSkills";
 import SavingThrowsComp from "./components/savingThrows";
 import HitPointsComp from "./components/hitPoints";
 import SensesComp from "./components/senses";
+import ProfArmorInitComp from "./components/profArmorInit";
 import "./index.html";
 import "./index.scss";
 import "./media/dragon.svg";
@@ -26,12 +27,15 @@ class App extends Component {
         <CharacterStatsComp />
         <Row>
           <CharacterSkillsComp />
-          <Col lg="3" className="border rounded background--fill">
+          <Col lg="3" className="background--fill border rounded">
             <SavingThrowsComp />
             <SensesComp />
           </Col>
           <Col lg="2" className="text-center background--fill border rounded">
             <HitPointsComp />
+          </Col>
+          <Col className="text-center background--fill border rounded">
+            <ProfArmorInitComp />
           </Col>
         </Row>
       </Container>

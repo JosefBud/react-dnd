@@ -78,6 +78,16 @@ class BaseInfo extends Component {
 
     const newLevel = determineLevel();
     store.dispatch(setLevel(newLevel));
+
+    this.handleLevelChange(newLevel);
+  }
+
+  handleLevelChange(levelString) {
+    const level = parseInt(levelString);
+
+    store.dispatch(setLevel(level));
+    store.dispatch(setRemainingHitDice(level));
+    store.dispatch(setProfBonus(1 + Math.ceil(level / 4)));
   }
 
   render() {
@@ -143,12 +153,7 @@ class BaseInfo extends Component {
                   aria-label="input"
                   type="number"
                   aria-describedby="Character Level"
-                  onChange={event => {
-                    store.dispatch(setLevel(parseInt(event.target.value)));
-                    store.dispatch(
-                      setRemainingHitDice(parseInt(event.target.value))
-                    );
-                  }}
+                  onChange={event => this.handleLevelChange(event.target.value)}
                 />
               </InputGroup>
             </Col>

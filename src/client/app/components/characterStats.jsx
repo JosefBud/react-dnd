@@ -15,7 +15,9 @@ import {
   setStatMods,
   setSkillMods,
   setSavingThrowMod,
-  setPassiveWisdom
+  setPassiveWisdom,
+  setInitative,
+  setArmorClass
 } from "../redux/actions";
 
 class CharacterStats extends Component {
@@ -41,6 +43,11 @@ class CharacterStats extends Component {
     store.dispatch(setStatMods(statName, modifier));
     if (statName === "wisdom") {
       store.dispatch(setPassiveWisdom(10 + modifier));
+    }
+
+    if (statName === "dexterity") {
+      store.dispatch(setInitative(modifier));
+      store.dispatch(setArmorClass(10 + modifier));
     }
   }
 

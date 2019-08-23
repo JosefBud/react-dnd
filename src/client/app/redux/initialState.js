@@ -181,7 +181,13 @@ const initialState = {
     }
   },
   passiveWisdom: 10,
-  profBonus: 0
+  profBonus: 2,
+  armorClass: 10,
+  initiative: 0,
+  abilitySave: {
+    dc: 0,
+    ability: ""
+  }
 }
 
 export default initialState;

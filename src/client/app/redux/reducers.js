@@ -22,17 +22,10 @@ import {
   SET_DEATH_SAVES,
   SET_SPEED,
   SET_PASSIVE_WISDOM,
-  SET_PROF_BONUS
+  SET_PROF_BONUS,
+  SET_ARMOR_CLASS,
+  SET_INITIATIVE
 } from './actions'
-
-function profBonus(state = initialState.profBonus, action) {
-  switch (action.type) {
-    case SET_PROF_BONUS:
-      return action.number;
-    default:
-      return state;
-  }
-}
 
 function characterXP(state = initialState.characterXP, action) {
   switch (action.type) {
@@ -185,6 +178,33 @@ function passiveWisdom(state = initialState.passiveWisdom, action) {
   }
 }
 
+function profBonus(state = initialState.profBonus, action) {
+  switch (action.type) {
+    case SET_PROF_BONUS:
+      return action.number;
+    default:
+      return state;
+  }
+}
+
+function armorClass(state = initialState.armorClass, action) {
+  switch (action.type) {
+    case SET_ARMOR_CLASS:
+      return action.number;
+    default:
+      return state;
+  }
+}
+
+function initiative(state = initialState.initiative, action) {
+  switch (action.type) {
+    case SET_INITIATIVE:
+      return action.number;
+    default:
+      return state;
+  }
+}
+
 const allReducers = combineReducers({
   characterXP,
   characterLevel,
@@ -195,7 +215,9 @@ const allReducers = combineReducers({
   deathSaves,
   speed,
   passiveWisdom,
-  profBonus
+  profBonus,
+  armorClass,
+  initiative
 })
 
 export default allReducers
