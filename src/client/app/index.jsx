@@ -10,6 +10,7 @@ import SavingThrowsComp from "./components/savingThrows";
 import HitPointsComp from "./components/hitPoints";
 import SensesComp from "./components/senses";
 import ProfArmorInitComp from "./components/profArmorInit";
+import InspirAbilitySaveComp from "./components/inspirAbilitySave";
 import "./index.html";
 import "./index.scss";
 import "./media/dragon.svg";
@@ -36,6 +37,7 @@ class App extends Component {
           </Col>
           <Col className="text-center background--fill border rounded">
             <ProfArmorInitComp />
+            <InspirAbilitySaveComp />
           </Col>
         </Row>
       </Container>

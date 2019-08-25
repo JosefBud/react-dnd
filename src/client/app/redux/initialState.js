@@ -184,9 +184,10 @@ const initialState = {
   profBonus: 2,
   armorClass: 10,
   initiative: 0,
+  inspiration: false,
   abilitySave: {
     dc: 0,
-    ability: ""
+    stat: ""
   }
 }
 

@@ -18,6 +18,9 @@ export const SET_PASSIVE_WISDOM = 'SET_PASSIVE_WISDOM';
 export const SET_PROF_BONUS = 'SET_PROF_BONUS';
 export const SET_ARMOR_CLASS = 'SET_ARMOR_CLASS';
 export const SET_INITIATIVE = 'SET_INITIATIVE';
+export const SET_INSPIRATION = 'SET_INSPIRATION';
+export const SET_ABILITY_SAVE_STAT = 'SET_ABILITY_SAVE_STAT';
+export const SET_ABILITY_SAVE_DC = 'SET_ABILITY_SAVE_DC';
 
 export function setXP(number) {
   return {
@@ -165,6 +168,27 @@ export function setArmorClass(number) {
 export function setInitative(number) {
   return {
     type: SET_INITIATIVE,
+    number
+  }
+}
+
+export function setInspiration(boolean) {
+  return {
+    type: SET_INSPIRATION,
+    boolean
+  }
+}
+
+export function setAbilitySaveStat(name) {
+  return {
+    type: SET_ABILITY_SAVE_STAT,
+    name
+  }
+}
+
+export function setAbilitySaveDC(number) {
+  return {
+    type: SET_ABILITY_SAVE_DC,
     number
   }
 }

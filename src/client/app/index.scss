@@ -94,6 +94,11 @@ input[type='number'] {
   border-radius: 0.3rem;
   outline: 0;
   vertical-align: middle;
+
+  &.checkbox--big {
+    width: 2em;
+    height: 2em;
+  }
 }
 
 .checkbox:checked {

@@ -24,7 +24,10 @@ import {
   SET_PASSIVE_WISDOM,
   SET_PROF_BONUS,
   SET_ARMOR_CLASS,
-  SET_INITIATIVE
+  SET_INITIATIVE,
+  SET_INSPIRATION,
+  SET_ABILITY_SAVE_STAT,
+  SET_ABILITY_SAVE_DC
 } from './actions'
 
 function characterXP(state = initialState.characterXP, action) {
@@ -205,6 +208,30 @@ function initiative(state = initialState.initiative, action) {
   }
 }
 
+function inspiration(state = initialState.inspiration, action) {
+  switch (action.type) {
+    case SET_INSPIRATION:
+      return action.boolean;
+    default:
+      return state;
+  }
+}
+
+function abilitySave(state = initialState.abilitySave, action) {
+  switch (action.type) {
+    case SET_ABILITY_SAVE_STAT:
+      return Object.assign({}, state, {
+        stat: action.name
+      });
+    case SET_ABILITY_SAVE_DC:
+      return Object.assign({}, state, {
+        dc: action.number
+      });
+    default:
+      return state;
+  }
+}
+
 const allReducers = combineReducers({
   characterXP,
   characterLevel,
@@ -217,7 +244,9 @@ const allReducers = combineReducers({
   passiveWisdom,
   profBonus,
   armorClass,
-  initiative
+  initiative,
+  inspiration,
+  abilitySave
 })
 
 export default allReducers
